@@ -1,57 +1,103 @@
 package com.example.projectphase1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.Selection;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignInScreen extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
+    boolean result = false;
+    DatabaseReference databaseReference;
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        //Checking for fragment count on backstack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else if (!doubleBackToExitPressedOnce) {
+            this.doubleBackToExitPressedOnce = true;
+            this.show_toast("Click BACK again to exit!");
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        } else {
+            super.onBackPressed();
+            return;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_screen);
 
-        email=findViewById(R.id.et_email);
-        password=findViewById(R.id.et_password);
+        email = findViewById(R.id.et_email);
+        password = findViewById(R.id.et_password);
 
     }
 
-    public void call_signup(View view)
-    {
+    public void call_signup(View view) {
         Intent intent = new Intent(SignInScreen.this, SignUpScreen.class);
         startActivity(intent);
     }
 
+    public void call_login(View view) {
 
-    public void call_login(View view)
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(email.getText().toString())) {
+                    if (password.getText().toString().equals(dataSnapshot.child(email.getText().toString()).child("user_Password").getValue())) {
+                        Toast.makeText(SignInScreen.this, "succexx", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(SignInScreen.this, "pass", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(SignInScreen.this, "jango", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    public void show_toast(String string)
     {
-
-        if( TextUtils.isEmpty(email.getText())){
-            email.setError( "Email is required!" );
-            //Toast.makeText(MainActivity.this, "Email is required!", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            if(TextUtils.isEmpty((password.getText())))
-            {
-                //password.setError("Password is required!");
-                Toast.makeText(SignInScreen.this, "Enter your password!", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-
-                Intent intent = new Intent(SignInScreen.this, SignInScreen.class);
-                startActivity(intent);
-            }
-        }
+        Toast toast = Toast.makeText(SignInScreen.this, string, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 20);
+        toast.show();
     }
 
 }

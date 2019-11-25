@@ -2,9 +2,12 @@ package com.example.projectphase1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -17,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         TextView textView = findViewById(R.id.tv_eworker);
         Animation animation = AnimationUtils.loadAnimation(this,R.anim.bounce);
         textView.startAnimation(animation);
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(MainActivity.this,SignInScreen.class);
+                Intent mainIntent = new Intent(MainActivity.this,RegistrationScreen.class);
                 startActivity(mainIntent);
                 finish();
             }

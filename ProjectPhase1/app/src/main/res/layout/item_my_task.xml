@@ -5,12 +5,15 @@
     android:background="@drawable/round_tasks"
     android:id="@+id/mytask_item_id"
     android:padding="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_height="wrap_content">
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/task_item_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/icon_worker"
         app:civ_border_color="#3f51b5"
         app:civ_border_width="4dp"
@@ -20,15 +23,26 @@
 
     <TextView
         android:id="@+id/task_item_name"
-        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginTop="20dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#000"
         android:text="Worker" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:textAlignment="textEnd"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_marginRight="5dp"
+        android:text="Status" />
 
 
 </LinearLayout>
