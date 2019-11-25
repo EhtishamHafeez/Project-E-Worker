@@ -3,7 +3,10 @@ package com.example.projectphase1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
@@ -11,6 +14,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,4 +38,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
+
+
 }
