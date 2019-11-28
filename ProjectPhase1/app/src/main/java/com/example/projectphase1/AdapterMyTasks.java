@@ -12,11 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -32,6 +35,7 @@ public class AdapterMyTasks extends RecyclerView.Adapter<AdapterMyTasks.MyViewHo
     public AdapterMyTasks(Context mcontext, List<ClassMyTask> jobsClassList) {
         this.mcontext = mcontext;
         this.myTasksClassList = jobsClassList;
+
     }
 
     @NonNull
@@ -46,7 +50,6 @@ public class AdapterMyTasks extends RecyclerView.Adapter<AdapterMyTasks.MyViewHo
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
-
         myViewHolder.linearLayout_Job_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,16 +60,17 @@ public class AdapterMyTasks extends RecyclerView.Adapter<AdapterMyTasks.MyViewHo
                 TextView task_dialogue_location=(TextView) dialog.findViewById(R.id.dialogue_myTask_Location);
                 TextView task_dialogue_bill=(TextView) dialog.findViewById(R.id.dialogue_myTask_bill);
                 TextView task_dialogue_date=(TextView) dialog.findViewById(R.id.dialogue_myTask_date);
-                TextView task_dialogue_UID=(TextView) dialog.findViewById(R.id.dialogue_myTask_Userid);
+                TextView task_dialogue_UID=(TextView) dialog.findViewById(R.id.dialogue_myTask_description);
 
-                task_dialogue_bill.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getTaskBill());
-                task_dialogue_date.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getTaskDate());
-                task_dialogue_ID.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getTaskId());
-                task_dialogue_job_id.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getTask_job_id());
-                task_dialogue_Jobname.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getTask_Job_Name());
-                task_dialogue_location.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getTaskLocation());
-                task_dialogue_UID.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getUserId());
-                task_dialogue_image.setImageResource(myTasksClassList.get(myViewHolder.getAdapterPosition()).getTaskImage());
+                task_dialogue_bill.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getClassMyTask_TaskBill());
+                task_dialogue_date.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getClassMyTask_TaskDate());
+                task_dialogue_ID.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getClassMyTask_TaskId());
+                task_dialogue_job_id.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getClassMyTask_task_job_id());
+                task_dialogue_Jobname.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getClassMyTask_Job_Name());
+                task_dialogue_location.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getClassMyTask_TaskLocation());
+                task_dialogue_UID.setText(""+myTasksClassList.get(myViewHolder.getAdapterPosition()).getClassMyTask_TaakDescription());
+
+                Picasso.with(mcontext).load(myTasksClassList.get(myViewHolder.getAdapterPosition()).getClassMyTask_TaskImage()).into( task_dialogue_image);
 
 
                 dialog.show();
@@ -87,24 +91,9 @@ public class AdapterMyTasks extends RecyclerView.Adapter<AdapterMyTasks.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterMyTasks.MyViewHolder2 holder, int position) {
-        holder.task_name.setText(myTasksClassList.get(position).getTask_Job_Name());
-        holder.task_image.setImageResource(myTasksClassList.get(position).getTaskImage());
-
-        int status = myTasksClassList.get(position).getUserId();
-
-        if(status==1)
-        {
-            holder.task_status.setText("On Going");
-            holder.task_status.setTextColor(Color.rgb(0,200,0));
-        }
-
-        else
-        {
-            holder.task_status.setText("Completed");
-            holder.task_status.setTextColor(Color.rgb(0,0,200));
-        }
-
+    public void onBindViewHolder(@NonNull MyViewHolder2 holder, int position) {
+        holder.task_name.setText(myTasksClassList.get(position).getClassMyTask_Job_Name());
+        Picasso.with(mcontext).load(myTasksClassList.get(position).getClassMyTask_TaskImage()).into(holder.task_image);
     }
 
     @Override
@@ -120,6 +109,7 @@ public class AdapterMyTasks extends RecyclerView.Adapter<AdapterMyTasks.MyViewHo
         private TextView task_status;
         public MyViewHolder2( View itemView) {
             super(itemView);
+
 
             linearLayout_Job_item=(LinearLayout)itemView.findViewById(R.id.mytask_item_id);
             task_name= (TextView)itemView.findViewById(R.id.task_item_name);

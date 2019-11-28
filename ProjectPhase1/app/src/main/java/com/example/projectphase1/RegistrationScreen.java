@@ -2,7 +2,6 @@ package com.example.projectphase1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,7 +13,8 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
-public class RegistrationScreen extends AppCompatActivity {
+public class
+RegistrationScreen extends AppCompatActivity {
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -46,71 +46,44 @@ public class RegistrationScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_screen);
-
     }
 
     public void call_r_signup(View view)
     {
-        if(isConnectedToInternet())
-        {
+        if(this.isConnectedToInternet()) {
             Intent intent = new Intent(RegistrationScreen.this, SignUpScreen.class);
             startActivity(intent);
         }
         else
         {
-          this.show_snack("Internet not connected",view);
+           this.show_snack("Connection Failed!",view);
         }
-
     }
 
     public void call_r_signin(View view)
     {
-        if(isConnectedToInternet())
-        {
+        if(this.isConnectedToInternet()) {
             Intent intent = new Intent(RegistrationScreen.this, SignInScreen.class);
             startActivity(intent);
         }
         else
         {
-
-            this.show_snack("Internet not connected",view);
+            this.show_snack("Connection Failed!",view);
         }
     }
 
     public void call_google(View view)
     {
-        if(isConnectedToInternet())
-        {
+        if(this.isConnectedToInternet()) {
             Intent intent = new Intent(RegistrationScreen.this, HomePageTabScreen.class);
             startActivity(intent);
         }
         else
         {
-            this.show_snack("Internet not connected",view);
+            this.show_snack("Connection Failed!",view);
         }
     }
 
-
-    public void show_toast(String string)
-    {
-        Toast toast = Toast.makeText(RegistrationScreen.this, string, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 20);
-        toast.show();
-    }
-
-
-    public void show_snack(String string,View view)
-    {
-        Snackbar.make(view, string, Snackbar.LENGTH_LONG)
-                .setAction("CLOSE", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                })
-                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
-                .show();
-    }
 
     public boolean isConnectedToInternet(){
         boolean have_WIFI = false;
@@ -131,4 +104,23 @@ public class RegistrationScreen extends AppCompatActivity {
         return have_MData||have_WIFI;
     }
 
+    public void show_snack(String string,View view)
+    {
+        Snackbar.make(view, string, Snackbar.LENGTH_LONG)
+                .setAction("CLOSE", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                .show();
+    }
+
+    public void show_toast(String string)
+    {
+        Toast toast = Toast.makeText(RegistrationScreen.this, string, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 20);
+        toast.show();
+    }
 }

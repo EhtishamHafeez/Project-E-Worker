@@ -51,7 +51,7 @@ public class HomePageTabScreen extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_profile) {
+        if (item.getItemId() == R.id.menu_feedback) {
             Intent intent = new Intent(this, MenuProfile.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.menu_help) {
@@ -66,6 +66,11 @@ public class HomePageTabScreen extends AppCompatActivity {
             startActivity(intent);
             finish();
             this.show_toast("Successfully Logged Out!");
+
+        }
+        else if(item.getItemId()==R.id.menu_voice_help)
+        {
+            startActivity(new Intent(HomePageTabScreen.this,voicehelp.class));
 
         }
         return true;
@@ -118,7 +123,13 @@ public class HomePageTabScreen extends AppCompatActivity {
 
     public void call_complain(View view)
     {
-        this.show_toast("Clicked");
+        Intent intent=new Intent(Intent.ACTION_SEND);
+        String[] recipients={"usamabashir007009@gmail.com"};
+        intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+        intent.setType("text/html");
+        intent.setPackage("com.google.android.gm");
+        this.startActivity(Intent.createChooser(intent, "Send mail"));
+
     }
 
     public void show_toast(String string)

@@ -3,10 +3,7 @@ package com.example.projectphase1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
+
+        Toast.makeText(this,"done ",Toast.LENGTH_LONG).show();
     }
-
-
 }

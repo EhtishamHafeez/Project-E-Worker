@@ -3,9 +3,12 @@ package com.example.projectphase1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextUtils;
@@ -69,18 +72,20 @@ public class SignInScreen extends AppCompatActivity {
     public void call_login(View view) {
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(email.getText().toString())) {
                     if (password.getText().toString().equals(dataSnapshot.child(email.getText().toString()).child("user_Password").getValue())) {
-                        Toast.makeText(SignInScreen.this, "succexx", Toast.LENGTH_LONG).show();
+                        setDefaults("username",email.getText().toString(),SignInScreen.this);
+                        Toast.makeText(SignInScreen.this, "Successfully Loggedin", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignInScreen.this,HomePageTabScreen.class));
                     } else {
-                        Toast.makeText(SignInScreen.this, "pass", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignInScreen.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(SignInScreen.this, "jango", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignInScreen.this, "Incorrect User Name", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -98,6 +103,13 @@ public class SignInScreen extends AppCompatActivity {
         Toast toast = Toast.makeText(SignInScreen.this, string, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 20);
         toast.show();
+    }
+
+    public static void setDefaults(String key, String value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
     }
 
 }

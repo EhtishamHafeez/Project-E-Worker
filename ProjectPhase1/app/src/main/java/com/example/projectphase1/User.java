@@ -3,8 +3,10 @@ package com.example.projectphase1;
 public class User {
     private String user_Email;
     private String user_Password;
+
     private  String user_Name;
     private String user_UserName;
+
 
     public void setUser_Email(String user_Email) {
         this.user_Email = user_Email;
