@@ -41,7 +41,7 @@ import kotlin.jvm.internal.LocalVariableReferencesKt;
 
 public class FragmentMyTask extends Fragment {
     View view;
-    String u="usama";
+    String u;
     private AdapterMyTasks recyclerViewAdopter;
     private RecyclerView myRecyclerView;
     private List<ClassMyTask> myList;

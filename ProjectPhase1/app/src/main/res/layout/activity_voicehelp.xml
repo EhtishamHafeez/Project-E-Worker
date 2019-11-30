@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context=".voicehelp"
+    >
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="30sp"
+        android:id="@+id/playbtn"
+        android:drawableStart="@drawable/icon_play"
+        android:paddingLeft="33dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="playvoice"
+        android:textColor="@color/White"
+        android:background="@drawable/round_button"
+
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:drawableStart="@drawable/icon_pause"
+        android:paddingLeft="34dp"
+        android:id="@+id/pausebtn"
+        android:layout_gravity="center_horizontal"
+        android:onClick="pausevoice"
+        android:textColor="@color/White"
+        android:background="@drawable/round_button"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:drawableStart="@drawable/icon_stop"
+        android:paddingLeft="32dp"
+        android:id="@+id/stopbtn"
+        android:layout_gravity="center_horizontal"
+        android:onClick="stopvoice"
+        android:textColor="@color/White"
+        android:background="@drawable/round_button"
+
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+
+        android:layout_marginTop="20dp"
+        android:textSize="15dp"
+        android:text="Back"
+        android:onClick="gotoback"
+        android:id="@+id/getback"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/White"
+        android:background="@drawable/round_button"
+
+        />
+
+</LinearLayout>
+</ScrollView>

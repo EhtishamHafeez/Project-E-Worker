@@ -111,7 +111,7 @@ public class SignUpScreen extends AppCompatActivity {
 
                                                     databaseReference.child(user_name.getText().toString()).setValue(user);
 
-                                                    UserEntity userEntity=new UserEntity(name.getText().toString(),email.getText().toString(),"phone number","Adress");
+                                                    UserEntity userEntity=new UserEntity(name.getText().toString(),email.getText().toString(),"03XX-XXXXXXXX","City,State");
                                                     roomDatabaseClass.myDao1().addProfileEntity(userEntity);
 
                                                     db.child(user_name.getText().toString()).setValue(new ClassProfile(user_name.getText().toString(),name.getText().toString(),email.getText().toString(),"phone number","Adress"));
