@@ -1,2 +1,8 @@
 # Project-E-Worker
-Android App
+
+Platform: 
+Android System (API Version above 9)
+
+Dependencies Required:
+Retrofit
+Firebase Database
